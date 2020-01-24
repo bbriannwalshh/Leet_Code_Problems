@@ -1,4 +1,4 @@
-
+// given a 2D grid, a rabbit is placed 
 
 
 const hungryRabbit = function (grid, pos = [], eaten = 0) {
