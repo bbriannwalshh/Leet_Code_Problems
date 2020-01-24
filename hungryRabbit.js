@@ -1,9 +1,9 @@
-// given a 2D grid, with each position denoted by a number representing carrots.
-// a rabbit is placed in the center of the grid--if the grid does not provide a 
-// middle, the position is chosen based on what location has the most carrots between
-// the handful of equally center positions. 
+// You are given a 2D grid, with each position denoted by a number representing 
+// carrots. A rabbit is placed in the center of the grid--if the grid does not 
+// provide a middle, the position is chosen based on what location has the most 
+// carrots between the handful of equally center positions. 
 // the rabbit will eat the carrots at that square, and then is able to move one
-// position vertically or horizontally to the square that holds the most carrots
+// position vertically or horizontally to the square that holds the most carrots.
 // the rabbit will follow this until he is directly surrounded by positions all 
 // containing zero carrots. The number of carrots consumed should be returned.
 
