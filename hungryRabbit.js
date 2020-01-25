@@ -51,19 +51,19 @@ const hungryRabbit = function (grid, pos = [], eaten = 0) {
 const startingPosition = function (grid) {
   let options = [];
   if (grid.length % 2 === 0) {
-    let row = [grid.length / 2, (grid.length / 2) - 1];
+    let rows = [grid.length / 2, (grid.length / 2) - 1];
 
     if (grid[0].length % 2 === 0) {
-      let col = [grid[0].length / 2, (grid[0].length / 2) - 1];
+      let cols = [grid[0].length / 2, (grid[0].length / 2) - 1];
 
-      for (let i = 0; i < row.length; i++) {
-        for (let j = 0; j < col.length; j++) {
-          options.push([row[i], col[j]]);
+      for (let i = 0; i < rows.length; i++) {
+        for (let j = 0; j < cols.length; j++) {
+          options.push([rows[i], cols[j]]);
         }
       }
 
     } else {
-      for (let i = 0; i < row.length; i++) {
+      for (let i = 0; i < rows.length; i++) {
         options.push([row[i], Math.floor(grid[0].length / 2)]);
       }
     }
@@ -71,10 +71,10 @@ const startingPosition = function (grid) {
     let row = Math.floor(grid.length / 2);
 
     if (grid[row].length % 2 === 0) {
-      let col = [grid[row].length / 2, (grid[row].length / 2) - 1];
+      let cols = [grid[row].length / 2, (grid[row].length / 2) - 1];
 
       for (let i = 0; i < col.length; i++) {
-        options.push(row, col[i]);
+        options.push(row, cols[i]);
       }
 
     } else {
