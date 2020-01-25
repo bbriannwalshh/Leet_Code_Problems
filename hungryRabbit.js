@@ -23,7 +23,7 @@ const hungryRabbit = function (grid, pos = [], eaten = 0) {
 
 
   if (grid[row + 1] && grid[row + 1][col] && grid[row + 1][col] > grid[next[0]][next[1]]) {
-    next = [row + 1, col + 1];
+    next = [row + 1, col];
   }
 
   if (grid[row - 1] && grid[row - 1][col] && grid[row - 1][col] > grid[next[0]][next[1]]) {
@@ -35,7 +35,7 @@ const hungryRabbit = function (grid, pos = [], eaten = 0) {
   }
 
   if (grid[row][col + 1] && grid[row][col + 1] > grid[next[0]][next[1]]) {
-    next = [row, col - 1];
+    next = [row, col + 1];
   }
 
 
