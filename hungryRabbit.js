@@ -19,8 +19,19 @@ const hungryRabbit = function (grid, pos = [], eaten = 0) {
   eaten += grid[row][col];
   grid[row][col] = 0;
 
-  let next = [row, col];
+  // let carrot_positions = {};
 
+  // carrot_positions[grid[row + 1]][grid[col] || 0] = [row + 1, col];
+  // carrot_positions[grid[row - 1]][grid[col] || 0] = [row - 1, col];
+  // carrot_positions[grid[row]][grid[col + 1] || 0] = [row, col + 1];
+  // carrot_positions[grid[row]][grid[col - 1] || 0] = [row, col] - 1;
+
+  // let all_carrots = Object.keys(carrot_positions);
+  // let max_carrots = Math.max(all_carrots);
+  // let next = carrot_positions[max_carrots];
+
+
+  let next = [row, col];
 
   if (grid[row + 1] && grid[row + 1][col] && grid[row + 1][col] > grid[next[0]][next[1]]) {
     next = [row + 1, col];
@@ -64,7 +75,7 @@ const startingPosition = function (grid) {
 
     } else {
       for (let i = 0; i < rows.length; i++) {
-        options.push([row[i], Math.floor(grid[0].length / 2)]);
+        options.push([rows[i], Math.floor(grid[0].length / 2)]);
       }
     }
   } else {
