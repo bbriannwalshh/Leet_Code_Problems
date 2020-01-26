@@ -14,7 +14,6 @@
 // Explanation: Return true because "leetcode" can be segmented as "leet code".
 
 
-
 // Correct answer, but "Time Limit Exceeded" given extreme examples
 
 var wordBreak = function (s, wordDict) {
