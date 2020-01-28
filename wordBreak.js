@@ -13,22 +13,41 @@
 
 // Explanation: Return true because "leetcode" can be segmented as "leet code".
 
+const wordBreak = function (s, wordDict) {
+  let table = new Array(s.length + 1).fill(false);
+  table[0] = true;
 
-// Correct answer, but "Time Limit Exceeded" given extreme examples
+  for (let i = 0; i < table.length; i++) {
+    if (!table[i]) continue;
 
-var wordBreak = function (s, wordDict) {
-  if (s.length === 0) return true;
-  let sub = "";
+    for (let j = 0; j < table.length; j++) {
+      let word = s.slice(i, j);
 
-  for (let i = 0; i < s.length; i++) {
-    sub = sub.concat(s[i]);
-
-    if (wordDict.includes(sub)) {
-      if (wordBreak(s.slice(i + 1), wordDict)) {
-        return true;
+      if (wordDict.includes(word)) {
+        table[j] = true;
       }
     }
   }
 
-  return false;
+  return table[table.length - 1];
 };
+
+
+// Correct answer, but "Time Limit Exceeded" given extreme examples
+
+// var wordBreak = function (s, wordDict) {
+//   if (s.length === 0) return true;
+//   let sub = "";
+
+//   for (let i = 0; i < s.length; i++) {
+//     sub = sub.concat(s[i]);
+
+//     if (wordDict.includes(sub)) {
+//       if (wordBreak(s.slice(i + 1), wordDict)) {
+//         return true;
+//       }
+//     }
+//   }
+
+//   return false;
+// };
