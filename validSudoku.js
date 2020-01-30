@@ -22,7 +22,7 @@
             rows[i][value] = true;
           }
         } else {
-          rows[i] = {value: true};
+          rows[i] = {[value]: true};
         }
 
         if (cols[j]) {
@@ -32,7 +32,7 @@
             cols[j][value] = true;
           }
         } else {
-          cols[j] = {value: true};
+          cols[j] = {[value]: true};
         }
 
         let cube = (3 * Math.floor(i / 3)) + Math.floor(j / 3);
@@ -44,11 +44,13 @@
             cubes[cube][value] = true;
           }
         } else {
-          cubes[cube] = {value: true};
+          cubes[cube] = {[value]: true};
         }
       }
     }
   }
+
+  // console.log(cubes);
 
   return true;
  };
