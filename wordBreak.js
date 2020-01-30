@@ -20,7 +20,7 @@ const wordBreak = function (s, wordDict) {
   for (let i = 0; i < table.length; i++) {
     if (!table[i]) continue;
 
-    for (let j = 0; j < table.length; j++) {
+    for (let j = i; j < table.length; j++) {
       let word = s.slice(i, j);
 
       if (wordDict.includes(word)) {
