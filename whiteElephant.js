@@ -55,3 +55,7 @@ let players = ["john", "paul", "george", "ringo"];
 let gifts = ["ball", "tv", "ball", "videogame", "tv", "videogame", "book"];
 
 console.log(whiteElephant(players, gifts));
+
+
+//  convert to for loop
+//  convert to stack implementation
