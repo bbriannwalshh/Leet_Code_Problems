@@ -13,7 +13,17 @@ function maxNonAdjacentSum(nums) {
   let table = new Array(nums.length).fill(0);
   table[0] = nums[0];
 
-  for (let i = 0; i < nums.length; i++) {
-
+  for (let i = 1; i < nums.length; i++) {
+    let skipLeftNeighbor = (table[i - 2]) === undefined ? 0 : table[i - 2];
+    let includeThisNum = skipLeftNeighbor + nums[i];
+    let notIncludingThisNum = table[i - 1];
+    table[i] = Math.max(includeThisNum, notIncludingThisNum);
   }
+
+  // console.log(table);
+
+  return table[table.length -1];
 }
+
+console.log(maxNonAdjacentSum([2, 7, 9, 3, 4]) );
+console.log(maxNonAdjacentSum([4,2,1,6]));
