@@ -25,15 +25,18 @@
 //   return table[table.length -1];
 // }
 
-function maxNonAdjacentSum(nums) {
+function maxNonAdjacentSum(nums, memo={}) {
+  if (nums.length in memo) return memo[nums];
   if (nums.length === 0) return 0;
   
   let firstEle = nums[0];
 
-  return Math.max(
+  memo[nums.length] =  Math.max(
     firstEle + maxNonAdjacentSum(nums.slice(2)), 
     maxNonAdjacentSum(nums.slice(1))
   );
+
+  return memo[nums.length];
 }
 
 console.log(maxNonAdjacentSum([2, 7, 9, 3, 4]) );
