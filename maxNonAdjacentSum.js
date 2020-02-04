@@ -10,5 +10,10 @@
 // maxNonAdjacentSum([4,2,1,6])         // => 10, because 4 + 6 
 
 function maxNonAdjacentSum(nums) {
-  
+  let table = new Array(nums.length).fill(0);
+  table[0] = nums[0];
+
+  for (let i = 0; i < nums.length; i++) {
+
+  }
 }
