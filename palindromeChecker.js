@@ -21,15 +21,14 @@ const isPalindrome = function (str, sub) {
         return false;
       }
     }
-    i++
-    j--
+    i++;
+    j--;
   }
 
   return true;
 }
 
 function palindromeChecker(s, startIndex, endIndex, subs) {
-  // Write your code here
   let submit = "";
 
   for (let i = 0; i < startIndex.length; i++) {
@@ -38,16 +37,14 @@ function palindromeChecker(s, startIndex, endIndex, subs) {
     let sub = subs[i];
 
     let str = s.slice(start, end + 1);
-    console.log(str);
-    console.log(sub);
 
     let pal;
     if (isPalindrome(str, sub)) {
       pal = "1";
     } else {
-      pal = "0"
+      pal = "0";
     }
-    console.log(pal);
+
     submit = submit.concat(pal);
   }
 
