@@ -54,3 +54,9 @@ function palindromeChecker(s, startIndex, endIndex, subs) {
   return submit;
 }
 
+let string = "bcba";
+let startIdx = [1,2,1];
+let endIdx = [3,3,1];
+let subs = [2,0,0];
+
+console.log(palindromeChecker(string, startIdx, endIdx, subs));
