@@ -12,13 +12,15 @@
  */
 const isSubtree = function (s, t) {
   let queue = [s];
+  let subTree = false;
 
   while (queue.length) {
     let tempQueue = [];
 
     for (let i = 0; i < queue.length; i++) {
       let curr = queue[i]
-      if (curr.val === t.val && subCheck(curr, t)) return true;
+      if (!curr.val) return false;
+      if (curr.val === t.val && subCheck(curr, t)) subTree = true;
       if (curr.left) tempQueue.push(curr.left);
       if (curr.right) tempQueue.push(curr.right);
     }
@@ -26,7 +28,7 @@ const isSubtree = function (s, t) {
     queue = tempQueue;
   }
 
-  return false;
+  return subTree;
 };
 
 const subCheck = function (s, t) {
@@ -39,7 +41,7 @@ const subCheck = function (s, t) {
     for (let i = 0; i < stackT.length; i++) {
       let eleS = stackS[i];
       let eleT = stackT[i];
-      if (eleS.val !== eleT.val) return false;
+      if (!eleS || !eleT || eleS.val !== eleT.val) return false;
       if (eleS && eleS.left) sStackTemp.push(eleS.left);
       if (eleS && eleS.right) sStackTemp.push(eleS.right);
       if (eleT && eleT.left) tStackTemp.push(eleT.left);
