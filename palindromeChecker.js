@@ -57,3 +57,39 @@ let endIdx = [3,3,1];
 let subs = [2,0,0];
 
 console.log(palindromeChecker(string, startIdx, endIdx, subs));
+
+// example 2
+// let string2 = "yczuykvelbobvfnjtfuqxxdnssuqevucxvwxgtetuuurzjaspvkounbpgyfmtboswmrcfvvzprqqbsksnvgkikzqigcdhqvdeoijkdkbxasyveskzyuiitaszdvgvsmchulrzwuwym"
+
+// let startIdx = 
+// [2, 64, 7, 33, 20, 3, 32, 4, 15, 6, 
+// 69, 5, 39, 16, 6, 54, 45, 30, 1, 39, 
+// 124, 29, 20, 45, 1, 25, 26, 110, 89, 75, 
+// 53, 21, 22, 18, 44, 39, 47, 2, 46, 4, 
+// 7, 22, 37, 83, 94, 87, 34, 79, 76, 3, 
+// 60, 82, 47, 5, 40, 40, 21, 112, 42, 32, 
+// 2, 131, 46, 67, 54, 48, 42, 74, 21, 54, 
+// 21, 32, 118, 16, 76, 75, 95, 71, 20, 51, 
+// 54, 88, 79, 72, 51, 53, 69, 22, 16, 29, 
+// 55, 11, 1, 68, 61, 23, 49, 119, 76, 111, ... 60 more items];
+
+// let endIdx = 
+
+
+// my Output (160 characters): 
+// 0101110000 
+// 1001100010 
+// 0001011110 
+// 1000000000
+// 0000010010
+// 0000000001
+// 0100101001
+// 1110110001
+// 0000001000
+// 1000000001
+// 0001000110
+// 0011000010
+// 1010101100
+// 0010010001
+// 0000001000
+// 0010010000
