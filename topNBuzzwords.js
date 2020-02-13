@@ -145,137 +145,268 @@
 // elsa - 4
 // "elmo" should be placed before "elsa" in the result because "elmo" appears in 3 different quotes and "elsa" appears in 2 different quotes.
 
-class Heap {
-  constructor(func) {
-    this.store = [];
-    // func - formula to determine what conditions to consider when comparing two values
-    this.func = func;
+// class Heap {
+//   constructor(func) {
+//     this.store = [];
+//     // func - formula to determine what conditions to consider when comparing two values
+//     this.func = func;
+//   }
+
+//   peek() {
+//     // return the max value without popping off.
+//     return this.store[0];
+//   }
+
+//   size() {
+//     return this.store.length;
+//   }
+
+//   push(value) {
+//     // 
+//     this.store.push(value);
+//     this.heapifyUp(this.store.length - 1);
+//   }
+
+//   getMax() {
+//     // if the store is 1 or less in length we can just pop it off the store
+//     if (this.store.length <= 1) return this.store.pop();
+//     // else we store the first value(max) return it 
+//     const result = this.store[0];
+//     // then heapify the last value in accordance with a heap structure
+//     this.store[0] = this.store.pop();
+//     this.heapifyDown(0);
+//     return result;
+//   }
+
+//   heapifyUp(child) {
+//     // retrieve parent of child
+//     const parent = Math.floor((child - 1) / 2);
+
+//     // if the comparison results in child being greater (or w/e func) then swap 
+//     if (child && this.func(this.store[child], this.store[parent])) {
+//       [this.store[child], this.store[parent]] =
+//         [this.store[parent], this.store[child]];
+//       this.heapifyUp(parent);
+//     }
+//   }
+
+//   heapifyDown(parent) {
+//     // retrieve children of parent and store in childs array
+//     const childs = [1, 2].map((n) => parent * 2 + n)
+//       .filter((n) => n < this.store.length);
+
+//     // set initial child to left child
+//     let child = childs[0];
+
+//     // IF the function results in true then set child to compare to parent 
+//     // as childs[1]
+//     if (childs[1] && this.func(this.store[childs[1]], this.store[child])) {
+//       child = childs[1];
+//     }
+
+//     // IF the child is greater(or lesser depending on func)
+//     // than the parent, we want to swap the two and call heapifyDown 
+//     // again to track that node as it bubbles up
+//     if (child && this.func(this.store[child], this.store[parent])) {
+//       [this.store[child], this.store[parent]] =
+//         [this.store[parent], this.store[child]];
+//       this.heapifyDown(child);
+//     }
+//   }
+// }
+
+
+// function topNBuzzwords(numToys, topFeatures, features, numQuotes, quotes) {
+//   const quoteWords = parseQuotes(quotes);
+//   const featureCount = scoreFeatures(quoteWords, features);
+//   console.log(featureCount);
+
+//   const weightFunc = (feat1, feat2) => {
+//     //feat1 and feat2 are keys to the featureCount hash
+//     if (featureCount[feat1][0] > featureCount[feat2][0]) {
+//       return true;
+//     }
+//     if (featureCount[feat1][0] === featureCount[feat2][0]) {
+//       if (featureCount[feat1][1] > featureCount[feat2][1]) return true;
+//       if (featureCount[feat1][1] === featureCount[feat2][1]) {
+//         return feat1 < feat2;
+//       }
+//     }
+//     return false;
+//   };
+
+//   const featureHeap = new Heap(weightFunc);
+//   for (feature in featureCount) {
+//     featureHeap.push(feature);
+//   }
+//   const result = [];
+//   for (let i = 0; i < topFeatures; i++) {
+//     result.push(featureHeap.getMax());
+//   }
+//   return result;
+// }
+
+
+// const parseQuotes = (quotes) => {
+//   const quoteWords = [];
+//   quotes.forEach((quote, idx) => {
+//     let currQuoteWords = quote.split(" ");
+//     quoteWords[idx] = currQuoteWords.map((word) => {
+//       let alteredWord = word.toLowerCase();
+//       alteredWord = alteredWord.replace(/[-.,()&$#!\?\[\]{}"':;]/g, "");
+//       return alteredWord;
+//     });
+//   });
+//   return quoteWords;
+// };
+
+// const scoreFeatures = (quoteWords, features) => {
+//   const featureCount = {};
+//   features.forEach((feature) => featureCount[feature] = [0, 0]);
+//   quoteWords.forEach((words) => {
+//     let uniqQuote = {};
+//     words.forEach((word) => {
+//       if (featureCount[word]) {
+//         featureCount[word][0]++;
+//         if (!uniqQuote[word]) {
+//           featureCount[word][1]++;
+//           uniqQuote[word] = true;
+//         }
+//       }
+//     });
+//   });
+//   return featureCount;
+// };
+
+// class MaxHeap {
+//   constructor() {
+//     this.array = [null];
+//   }
+
+//   push(ele) {
+//     this.array.push(ele);
+//     let idx = this.array.length - 1;
+//     this.siftUp(idx);
+//   }
+
+//   getMax() {
+//     let max = this.array[1];
+//     this.array[1] = this.array.pop();
+//     this.siftDown(1);
+//     return max;
+//   }
+
+//   siftUp(idx) {
+//     if (idx === 1) return;
+
+//     let parentIdx = Math.floor(idx / 2);
+//     let parentEle = this.array[parentIdx];
+//     parentEle = Object.values(parentEle)[0];
+//     let currentEle = this.array[idx];
+//     currentEle = Object.values(currentEle)[0];
+
+//     if (parentEle < currentEle) {
+//       this.swap(parentIdx, idx);
+//       this.siftUp(parentIdx);
+//     }
+//   }
+
+//   siftDown(idx) {
+//     let val = this.array[idx];
+//     let leftChildIdx = idx * 2;
+//     let rightChildIdx = idx * 2 + 1;
+//     let leftChild = this.array[leftChildIdx];
+//     let rightChild = this.array[rightChildIdx];
+
+//     if (leftChild === undefined) leftChild = -Infinity; 
+//     if (rightChild === undefined) rightChild = -Infinity; 
+
+//     if (val >= leftChild && val >= rightChild) return val;
+
+//     if (leftChild > rightChild) {
+//       this.swap(idx, leftChildIdx);
+//       this.siftDown(leftChildIdx);
+//     } else {
+//       this.swap(idx, rightChildIdx);
+//       this.siftDown(rightChildIdx);
+//     }
+//   }
+
+//   swap(idx1, idx2) {
+//     [this.array[idx1], this.array[idx2]] = [this.array[idx2], this.array[idx1]];
+//   }
+
+// }
+
+
+// let heap = new MaxHeap();
+// heap.push(5);
+// heap.push(8);
+// heap.push(7);
+// heap.push(3);
+// heap.push(12);
+// heap.push(14);
+// heap.push(20);
+// heap.push(4);
+// heap.push(2);
+// heap.push(100);
+// console.log(heap.array);
+// console.log(heap.getMax());
+// console.log(heap.array);
+
+
+function topNBuzzwords(numToys, topToys, toys, numQuotes, quotes) {
+  let counter = {};
+  for (let i = 0; i < numToys; i++) {
+    counter[`${toys[i]}`] = [0, 0];
   }
 
-  peek() {
-    // return the max value without popping off.
-    return this.store[0];
+  let letters = [];
+  for (let i = 0; i < numToys; i++) {
+    letters.push(toys[i][0]);
   }
 
-  size() {
-    return this.store.length;
-  }
+  for (let i = 0; i < numQuotes; i++) {
+    let quote = quotes[i];
+    quoteCounter = {};
 
-  push(value) {
-    // 
-    this.store.push(value);
-    this.heapifyUp(this.store.length - 1);
-  }
+    for (let j = 0; j< quote.length; j++) {
+      let char = quote[j];
 
-  getMax() {
-    // if the store is 1 or less in length we can just pop it off the store
-    if (this.store.length <= 1) return this.store.pop();
-    // else we store the first value(max) return it 
-    const result = this.store[0];
-    // then heapify the last value in accordance with a heap structure
-    this.store[0] = this.store.pop();
-    this.heapifyDown(0);
-    return result;
-  }
+      for (let k = 0; k < letters.length; k++) {
+        if (char.toLowerCase() === letters[k].toLowerCase()) {
+          let toy = toys[k];
+          let quoteSlice = quote.slice(j, j + toy.length);
 
-  heapifyUp(child) {
-    // retrieve parent of child
-    const parent = Math.floor((child - 1) / 2);
-
-    // if the comparison results in child being greater (or w/e func) then swap 
-    if (child && this.func(this.store[child], this.store[parent])) {
-      [this.store[child], this.store[parent]] =
-        [this.store[parent], this.store[child]];
-      this.heapifyUp(parent);
-    }
-  }
-
-  heapifyDown(parent) {
-    // retrieve children of parent and store in childs array
-    const childs = [1, 2].map((n) => parent * 2 + n)
-      .filter((n) => n < this.store.length);
-
-    // set initial child to left child
-    let child = childs[0];
-
-    // IF the function results in true then set child to compare to parent 
-    // as childs[1]
-    if (childs[1] && this.func(this.store[childs[1]], this.store[child])) {
-      child = childs[1];
-    }
-
-    // IF the child is greater(or lesser depending on func)
-    // than the parent, we want to swap the two and call heapifyDown 
-    // again to track that node as it bubbles up
-    if (child && this.func(this.store[child], this.store[parent])) {
-      [this.store[child], this.store[parent]] =
-        [this.store[parent], this.store[child]];
-      this.heapifyDown(child);
-    }
-  }
-}
-
-
-function topNBuzzwords(numToys, topFeatures, features, numQuotes, quotes) {
-  const quoteWords = parseQuotes(quotes);
-  const featureCount = scoreFeatures(quoteWords, features);
-  console.log(featureCount);
-  const weightFunc = (feat1, feat2) => {
-    //feat1 and feat2 are keys to the featureCount hash
-    if (featureCount[feat1][0] > featureCount[feat2][0]) {
-      return true;
-    }
-    if (featureCount[feat1][0] === featureCount[feat2][0]) {
-      if (featureCount[feat1][1] > featureCount[feat2][1]) return true;
-      if (featureCount[feat1][1] === featureCount[feat2][1]) {
-        return feat1 < feat2;
-      }
-    }
-    return false;
-  };
-
-  const featureHeap = new Heap(weightFunc);
-  for (feature in featureCount) {
-    featureHeap.push(feature);
-  }
-  const result = [];
-  for (let i = 0; i < topFeatures; i++) {
-    result.push(featureHeap.getMax());
-  }
-  return result;
-}
-
-
-const parseQuotes = (quotes) => {
-  const quoteWords = [];
-  quotes.forEach((quote, idx) => {
-    let currQuoteWords = quote.split(" ");
-    quoteWords[idx] = currQuoteWords.map((word) => {
-      let alteredWord = word.toLowerCase();
-      alteredWord = alteredWord.replace(/[-.,()&$#!\?\[\]{}"':;]/g, "");
-      return alteredWord;
-    });
-  });
-  return quoteWords;
-};
-
-const scoreFeatures = (quoteWords, features) => {
-  const featureCount = {};
-  features.forEach((feature) => featureCount[feature] = [0, 0]);
-  quoteWords.forEach((words) => {
-    let uniqQuote = {};
-    words.forEach((word) => {
-      if (featureCount[word]) {
-        featureCount[word][0]++;
-        if (!uniqQuote[word]) {
-          featureCount[word][1]++;
-          uniqQuote[word] = true;
+          if (quoteSlice.toLowerCase() === toy.toLowerCase()) {
+            if (quoteCounter[toy]) {
+              // quoteCounter[`${toy}`] += 1;
+              quoteCounter[toy] += 1;
+            } else {
+              quoteCounter[toy] = 1;
+              // quoteCounter[`${toy}`] = 1;
+            }
+          }
         }
       }
-    });
-  });
-  return featureCount;
-};
+    }
+
+    let keys = Object.keys(quoteCounter);
+    
+    for (let i = 0; i < keys.length; i++) {
+      let key = keys[i];
+
+      if (counter[key]) {
+        counter[key][0] += quoteCounter[key];
+        counter[key][1] += 1;
+      } else {
+        counter[key] = [quoteCounter[key], 1];
+      }
+    }
+  }
+
+  return (counter);
+}
 
 let numToys = 6,
   topToys = 2,
@@ -290,4 +421,5 @@ let numToys = 6,
     "Warcraft is slowly rising in popularity ahead of the holiday season"
   ];
 
+topNBuzzwords(numToys, topToys, toys, numQuotes, quotes);
 console.log(topNBuzzwords(numToys, topToys, toys, numQuotes, quotes));
