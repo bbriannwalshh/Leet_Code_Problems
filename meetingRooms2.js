@@ -173,7 +173,7 @@ var minMeetingRooms = function (intervals) {
     }
   }
 
-  console.log(heap.store)
+  console.log(heap.store);
   return heap.store.length - 1;
 
 

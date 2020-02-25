@@ -15,6 +15,8 @@ const sortingFunction = function (a, b) {
 
 
 var canFinish = function (numCourses, prerequisites) {
+  debugger
+
   if (!prerequisites.length) return true;
   let object = {};
   let keys = [];
@@ -46,9 +48,9 @@ var canFinish = function (numCourses, prerequisites) {
 };
 
 const dfs = function (prereqs, prerequisites, visited = {}) {
+  debugger
 
   if (!prereqs || !prereqs.length) {
-    console.log(prereqs);
     return 1;
   } else {
     let counter = 0;
