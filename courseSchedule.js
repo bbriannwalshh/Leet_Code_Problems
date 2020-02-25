@@ -48,6 +48,7 @@ var canFinish = function (numCourses, prerequisites) {
 const dfs = function (prereqs, prerequisites, visited = {}) {
 
   if (!prereqs || !prereqs.length) {
+    console.log(prereqs);
     return 1;
   } else {
     let counter = 0;
@@ -56,7 +57,7 @@ const dfs = function (prereqs, prerequisites, visited = {}) {
         return false;
       } else {
         visited[prereqs[i]] = true;
-        let answer =  dfs(prereqs[i], prerequisites, visited);
+        let answer =  dfs([prereqs[i]], prerequisites, visited);
         if (!answer) {
           return false;
         } else {
