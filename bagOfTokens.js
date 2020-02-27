@@ -7,16 +7,16 @@ var bagOfTokensScore = function (tokens, P) {
   let sorted = tokens.sort((a, b) => a - b);
   let output = 0;
 
-  while (tokens.length) {
-    let start = tokens[0];
+  while (sorted.length) {
+    let start = sorted[0];
 
     if (start <= P) {
-      tokens.shift();
+      sorted.shift();
       P -= start;
       output += 1;
     } else {
-      if (output > 0 && tokens.length >= 2) {
-        let newPower = tokens.pop();
+      if (output > 0 && sorted.length >= 2) {
+        let newPower = sorted.pop();
         P += newPower;
         output -= 1;
       } else {
