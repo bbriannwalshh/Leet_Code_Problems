@@ -37,12 +37,18 @@ var beforeAndAfterPuzzles = function (phrases) {
           newPhrase.pop();
           let positions = [j, indices[k]].sort();
 
-          if (!previousCombos[positions]) {
-            previousCombos[positions] = true;
-            let endingPhrase = splitPhrases[indices[k]];
-            newPhrase = newPhrase.concat(endingPhrase);
-            newPhrase = newPhrase.join(" ");
-            newPhrases.push(newPhrase);
+          let endingPhrase = splitPhrases[indices[k]];
+          newPhrase = newPhrase.concat(endingPhrase);
+          newPhrase = newPhrase.join(" ");
+
+          if (previousCombos[positions]) {
+            let word = previousCombos[positions];
+            if (word !== newPhrase) {
+              newPhrases.push(newPhrase);
+            }
+          } else {
+            previousCombos[positions] = newPhrase;
+            newPhrases.push(newPhrase)
           }
         }
       }
@@ -50,6 +56,7 @@ var beforeAndAfterPuzzles = function (phrases) {
   }
 
   return newPhrases.sort();
+
 };
 
 // var createPhraseDict = function (phrases) {
@@ -112,22 +119,110 @@ var beforeAndAfterPuzzles = function (phrases) {
 //   return Array.from(output).sort();
 // };
 
-let input = ["ni kntqfmv thyqxe dh xhnbd thyqxe s", "s oqefp kntqfmv l ts nalc dbnt", 
-"l zmb ts thyqxe kxi dh ni ovdqvb dbnt s l j nqirao j l", "z ovdqvb qoqhnxt kntqfmv xhnbd j l", 
-"zjje l s ysvpvc ysvpvc oqefp rhgfzeaz rhgfzeaz zjje nalc jymavm xhnbd j l l nqirao j xhnbd",
- "ts thyqxe nalc xhnbd ysvpvc l trijn qoqhnxt zaowxcc qtp lirhaxd j xhnbd zbvntzo lirhaxd vhyntf z",
-  "qtp ovdqvb dh jymavm kntqfmv zjje qtp qoqhnxt zjje zjje qtp j rhgfzeaz ts z j", "ysvpvc kxi", 
-  "nalc zaowxcc kxi", "j nqirao vhyntf j j j jymavm rhgfzeaz zjje ts qtp lirhaxd j", 
-  "ysvpvc dbnt zbvntzo qtp trijn", "z nalc qtp qtp ni ts", "dh", 
+let input = [
+  "ni kntqfmv thyqxe dh xhnbd thyqxe s", 
+  "s oqefp kntqfmv l ts nalc dbnt", 
+  "l zmb ts thyqxe kxi dh ni ovdqvb dbnt s l j nqirao j l", 
+  "z ovdqvb qoqhnxt kntqfmv xhnbd j l", 
+  "zjje l s ysvpvc ysvpvc oqefp rhgfzeaz rhgfzeaz zjje nalc jymavm xhnbd j l l nqirao j xhnbd",
+  "ts thyqxe nalc xhnbd ysvpvc l trijn qoqhnxt zaowxcc qtp lirhaxd j xhnbd zbvntzo lirhaxd vhyntf z",
+  "qtp ovdqvb dh jymavm kntqfmv zjje qtp qoqhnxt zjje zjje qtp j rhgfzeaz ts z j", 
+  "ysvpvc kxi", 
+  "nalc zaowxcc kxi", 
+  "j nqirao vhyntf j j j jymavm rhgfzeaz zjje ts qtp lirhaxd j", 
+  "ysvpvc dbnt zbvntzo qtp trijn", 
+  "z nalc qtp qtp ni ts", 
+  "dh", 
   "l lirhaxd dh ysvpvc kntqfmv j zjje ysvpvc ysvpvc trijn s dh dh dbnt dh", 
-  "vhyntf thyqxe ysvpvc trijn", "zbvntzo vhyntf zaowxcc vhyntf ni z qoqhnxt j zmb l ni", 
+  "vhyntf thyqxe ysvpvc trijn", 
+  "zbvntzo vhyntf zaowxcc vhyntf ni z qoqhnxt j zmb l ni", 
   "kntqfmv ni ovdqvb ni zmb oqefp kntqfmv j l zjje zbvntzo nqirao nqirao s", 
   "qtp lirhaxd zbvntzo zjje thyqxe nalc kxi zjje dbnt l z j", 
-  "z thyqxe oqefp trijn lirhaxd jymavm zjje", "zaowxcc zaowxcc zaowxcc thyqxe ni", 
-  "qoqhnxt lirhaxd zjje vhyntf s", "trijn xhnbd l ni kxi j s j trijn ysvpvc nqirao ts kntqfmv qtp vhyntf trijn j dbnt ts nqirao", 
-  "qtp z qoqhnxt oqefp ts oqefp kntqfmv thyqxe s", "zmb ni s nqirao rhgfzeaz nqirao vhyntf rhgfzeaz ovdqvb dbnt vhyntf l l ts", 
-  "nqirao thyqxe kxi thyqxe l zmb j nqirao zmb ysvpvc zbvntzo l nalc j ni z ts xhnbd z kntqfmv kxi", "dbnt qoqhnxt zjje", "trijn s", 
-  "xhnbd ni qtp j qoqhnxt zjje zaowxcc ni ts dh xhnbd zjje z dh ts", "vhyntf s ovdqvb oqefp z zbvntzo trijn qoqhnxt oqefp trijn kntqfmv qoqhnxt l zaowxcc ni", 
+  "z thyqxe oqefp trijn lirhaxd jymavm zjje", 
+  "zaowxcc zaowxcc zaowxcc thyqxe ni", 
+  "qoqhnxt lirhaxd zjje vhyntf s", 
+  "trijn xhnbd l ni kxi j s j trijn ysvpvc nqirao ts kntqfmv qtp vhyntf trijn j dbnt ts nqirao", 
+  "qtp z qoqhnxt oqefp ts oqefp kntqfmv thyqxe s", 
+  "zmb ni s nqirao rhgfzeaz nqirao vhyntf rhgfzeaz ovdqvb dbnt vhyntf l l ts", 
+  "nqirao thyqxe kxi thyqxe l zmb j nqirao zmb ysvpvc zbvntzo l nalc j ni z ts xhnbd z kntqfmv kxi", 
+  "dbnt qoqhnxt zjje", 
+  "trijn s", 
+  "xhnbd ni qtp j qoqhnxt zjje zaowxcc ni ts dh xhnbd zjje z dh ts", 
+  "vhyntf s ovdqvb oqefp z zbvntzo trijn qoqhnxt oqefp trijn kntqfmv qoqhnxt l zaowxcc ni", 
   "l vhyntf trijn dh lirhaxd zmb dbnt vhyntf qoqhnxt ni l j s"];
 
   console.log(beforeAndAfterPuzzles(input));
+
+
+  // Correct Answer:
+
+// [
+//   'dbnt qoqhnxt zjje l s ysvpvc ysvpvc oqefp rhgfzeaz rhgfzeaz zjje nalc jymavm xhnbd j l l nqirao j xhnbd',
+//   'kntqfmv ni ovdqvb ni zmb oqefp kntqfmv j l zjje zbvntzo nqirao nqirao s oqefp kntqfmv l ts nalc dbnt',
+//   'l lirhaxd dh ysvpvc kntqfmv j zjje ysvpvc ysvpvc trijn s dh dh dbnt dh',
+//   'l vhyntf trijn dh lirhaxd zmb dbnt vhyntf qoqhnxt ni l j s oqefp kntqfmv l ts nalc dbnt',
+//   'l zmb ts thyqxe kxi dh ni ovdqvb dbnt s l j nqirao j l lirhaxd dh ysvpvc kntqfmv j zjje ysvpvc ysvpvc trijn s dh dh dbnt dh',
+//   'l zmb ts thyqxe kxi dh ni ovdqvb dbnt s l j nqirao j l vhyntf trijn dh lirhaxd zmb dbnt vhyntf qoqhnxt ni l j s',
+//   'ni kntqfmv thyqxe dh xhnbd thyqxe s oqefp kntqfmv l ts nalc dbnt',
+//   'qoqhnxt lirhaxd zjje vhyntf s oqefp kntqfmv l ts nalc dbnt',
+//   'qtp lirhaxd zbvntzo zjje thyqxe nalc kxi zjje dbnt l z j nqirao vhyntf j j j jymavm rhgfzeaz zjje ts qtp lirhaxd j',
+//   'qtp ovdqvb dh jymavm kntqfmv zjje qtp qoqhnxt zjje zjje qtp j rhgfzeaz ts z j nqirao vhyntf j j j jymavm rhgfzeaz zjje ts qtp lirhaxd j',
+//   'qtp z qoqhnxt oqefp ts oqefp kntqfmv thyqxe s oqefp kntqfmv l ts nalc dbnt',
+//   's oqefp kntqfmv l ts nalc dbnt qoqhnxt zjje',
+//   'trijn s oqefp kntqfmv l ts nalc dbnt',
+//   'trijn xhnbd l ni kxi j s j trijn ysvpvc nqirao ts kntqfmv qtp vhyntf trijn j dbnt ts nqirao thyqxe kxi thyqxe l zmb j nqirao zmb ysvpvc zbvntzo l nalc j ni z ts xhnbd z kntqfmv kxi',
+//   'ts thyqxe nalc xhnbd ysvpvc l trijn qoqhnxt zaowxcc qtp lirhaxd j xhnbd zbvntzo lirhaxd vhyntf z nalc qtp qtp ni ts',
+//   'ts thyqxe nalc xhnbd ysvpvc l trijn qoqhnxt zaowxcc qtp lirhaxd j xhnbd zbvntzo lirhaxd vhyntf z ovdqvb qoqhnxt kntqfmv xhnbd j l',
+//   'ts thyqxe nalc xhnbd ysvpvc l trijn qoqhnxt zaowxcc qtp lirhaxd j xhnbd zbvntzo lirhaxd vhyntf z thyqxe oqefp trijn lirhaxd jymavm zjje',
+//   'vhyntf s ovdqvb oqefp z zbvntzo trijn qoqhnxt oqefp trijn kntqfmv qoqhnxt l zaowxcc ni kntqfmv thyqxe dh xhnbd thyqxe s',
+//   'vhyntf thyqxe ysvpvc trijn s',
+//   'vhyntf thyqxe ysvpvc trijn xhnbd l ni kxi j s j trijn ysvpvc nqirao ts kntqfmv qtp vhyntf trijn j dbnt ts nqirao',
+//   'xhnbd ni qtp j qoqhnxt zjje zaowxcc ni ts dh xhnbd zjje z dh ts thyqxe nalc xhnbd ysvpvc l trijn qoqhnxt zaowxcc qtp lirhaxd j xhnbd zbvntzo lirhaxd vhyntf z',
+//   'ysvpvc dbnt zbvntzo qtp trijn s',
+//   'ysvpvc dbnt zbvntzo qtp trijn xhnbd l ni kxi j s j trijn ysvpvc nqirao ts kntqfmv qtp vhyntf trijn j dbnt ts nqirao',
+//   'z nalc qtp qtp ni ts thyqxe nalc xhnbd ysvpvc l trijn qoqhnxt zaowxcc qtp lirhaxd j xhnbd zbvntzo lirhaxd vhyntf z',
+//   'z ovdqvb qoqhnxt kntqfmv xhnbd j l lirhaxd dh ysvpvc kntqfmv j zjje ysvpvc ysvpvc trijn s dh dh dbnt dh',
+//   'z ovdqvb qoqhnxt kntqfmv xhnbd j l vhyntf trijn dh lirhaxd zmb dbnt vhyntf qoqhnxt ni l j s',
+//   'z ovdqvb qoqhnxt kntqfmv xhnbd j l zmb ts thyqxe kxi dh ni ovdqvb dbnt s l j nqirao j l',
+//   'z thyqxe oqefp trijn lirhaxd jymavm zjje l s ysvpvc ysvpvc oqefp rhgfzeaz rhgfzeaz zjje nalc jymavm xhnbd j l l nqirao j xhnbd',
+//   'zaowxcc zaowxcc zaowxcc thyqxe ni kntqfmv thyqxe dh xhnbd thyqxe s',
+//   'zbvntzo vhyntf zaowxcc vhyntf ni z qoqhnxt j zmb l ni kntqfmv thyqxe dh xhnbd thyqxe s',
+//   'zjje l s ysvpvc ysvpvc oqefp rhgfzeaz rhgfzeaz zjje nalc jymavm xhnbd j l l nqirao j xhnbd ni qtp j qoqhnxt zjje zaowxcc ni ts dh xhnbd zjje z dh ts',
+//   'zmb ni s nqirao rhgfzeaz nqirao vhyntf rhgfzeaz ovdqvb dbnt vhyntf l l ts thyqxe nalc xhnbd ysvpvc l trijn qoqhnxt zaowxcc qtp lirhaxd j xhnbd zbvntzo lirhaxd vhyntf z'
+// ]
+
+// My Answer:
+
+// [
+//   'dbnt qoqhnxt zjje l s ysvpvc ysvpvc oqefp rhgfzeaz rhgfzeaz zjje nalc jymavm xhnbd j l l nqirao j xhnbd',
+//   'kntqfmv ni ovdqvb ni zmb oqefp kntqfmv j l zjje zbvntzo nqirao nqirao s oqefp kntqfmv l ts nalc dbnt',
+//   'l lirhaxd dh ysvpvc kntqfmv j zjje ysvpvc ysvpvc trijn s dh dh dbnt dh',
+//   'l vhyntf trijn dh lirhaxd zmb dbnt vhyntf qoqhnxt ni l j s oqefp kntqfmv l ts nalc dbnt',
+//   'l zmb ts thyqxe kxi dh ni ovdqvb dbnt s l j nqirao j l lirhaxd dh ysvpvc kntqfmv j zjje ysvpvc ysvpvc trijn s dh dh dbnt dh',
+//   'l zmb ts thyqxe kxi dh ni ovdqvb dbnt s l j nqirao j l vhyntf trijn dh lirhaxd zmb dbnt vhyntf qoqhnxt ni l j s',
+//   'ni kntqfmv thyqxe dh xhnbd thyqxe s oqefp kntqfmv l ts nalc dbnt',
+//   'qoqhnxt lirhaxd zjje vhyntf s oqefp kntqfmv l ts nalc dbnt',
+//   'qtp lirhaxd zbvntzo zjje thyqxe nalc kxi zjje dbnt l z j nqirao vhyntf j j j jymavm rhgfzeaz zjje ts qtp lirhaxd j',
+//   'qtp ovdqvb dh jymavm kntqfmv zjje qtp qoqhnxt zjje zjje qtp j rhgfzeaz ts z j nqirao vhyntf j j j jymavm rhgfzeaz zjje ts qtp lirhaxd j',
+//   'qtp z qoqhnxt oqefp ts oqefp kntqfmv thyqxe s oqefp kntqfmv l ts nalc dbnt',
+//   's oqefp kntqfmv l ts nalc dbnt qoqhnxt zjje',
+//   'trijn s oqefp kntqfmv l ts nalc dbnt',
+//   'trijn xhnbd l ni kxi j s j trijn ysvpvc nqirao ts kntqfmv qtp vhyntf trijn j dbnt ts nqirao thyqxe kxi thyqxe l zmb j nqirao zmb ysvpvc zbvntzo l nalc j ni z ts xhnbd z kntqfmv kxi',
+//   'ts thyqxe nalc xhnbd ysvpvc l trijn qoqhnxt zaowxcc qtp lirhaxd j xhnbd zbvntzo lirhaxd vhyntf z nalc qtp qtp ni ts',
+//   'ts thyqxe nalc xhnbd ysvpvc l trijn qoqhnxt zaowxcc qtp lirhaxd j xhnbd zbvntzo lirhaxd vhyntf z ovdqvb qoqhnxt kntqfmv xhnbd j l',
+//   'ts thyqxe nalc xhnbd ysvpvc l trijn qoqhnxt zaowxcc qtp lirhaxd j xhnbd zbvntzo lirhaxd vhyntf z thyqxe oqefp trijn lirhaxd jymavm zjje',
+//   'vhyntf s ovdqvb oqefp z zbvntzo trijn qoqhnxt oqefp trijn kntqfmv qoqhnxt l zaowxcc ni kntqfmv thyqxe dh xhnbd thyqxe s',
+//   'vhyntf thyqxe ysvpvc trijn s',
+//   'vhyntf thyqxe ysvpvc trijn xhnbd l ni kxi j s j trijn ysvpvc nqirao ts kntqfmv qtp vhyntf trijn j dbnt ts nqirao',
+//   'xhnbd ni qtp j qoqhnxt zjje zaowxcc ni ts dh xhnbd zjje z dh ts thyqxe nalc xhnbd ysvpvc l trijn qoqhnxt zaowxcc qtp lirhaxd j xhnbd zbvntzo lirhaxd vhyntf z',
+//   'ysvpvc dbnt zbvntzo qtp trijn s',
+//   'ysvpvc dbnt zbvntzo qtp trijn xhnbd l ni kxi j s j trijn ysvpvc nqirao ts kntqfmv qtp vhyntf trijn j dbnt ts nqirao',
+//   'z ovdqvb qoqhnxt kntqfmv xhnbd j l lirhaxd dh ysvpvc kntqfmv j zjje ysvpvc ysvpvc trijn s dh dh dbnt dh',
+//   'z ovdqvb qoqhnxt kntqfmv xhnbd j l vhyntf trijn dh lirhaxd zmb dbnt vhyntf qoqhnxt ni l j s',
+//   'z ovdqvb qoqhnxt kntqfmv xhnbd j l zmb ts thyqxe kxi dh ni ovdqvb dbnt s l j nqirao j l',
+//   'z thyqxe oqefp trijn lirhaxd jymavm zjje l s ysvpvc ysvpvc oqefp rhgfzeaz rhgfzeaz zjje nalc jymavm xhnbd j l l nqirao j xhnbd',
+//   'zaowxcc zaowxcc zaowxcc thyqxe ni kntqfmv thyqxe dh xhnbd thyqxe s',
+//   'zbvntzo vhyntf zaowxcc vhyntf ni z qoqhnxt j zmb l ni kntqfmv thyqxe dh xhnbd thyqxe s',
+//   'zjje l s ysvpvc ysvpvc oqefp rhgfzeaz rhgfzeaz zjje nalc jymavm xhnbd j l l nqirao j xhnbd ni qtp j qoqhnxt zjje zaowxcc ni ts dh xhnbd zjje z dh ts',
+//   'zmb ni s nqirao rhgfzeaz nqirao vhyntf rhgfzeaz ovdqvb dbnt vhyntf l l ts thyqxe nalc xhnbd ysvpvc l trijn qoqhnxt zaowxcc qtp lirhaxd j xhnbd zbvntzo lirhaxd vhyntf z'
+// ]
