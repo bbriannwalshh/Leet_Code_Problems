@@ -4,7 +4,6 @@
  */
 var beforeAndAfterPuzzles = function (phrases) {
   let firstWords = {};
-  let lastWords = {};
   let splitPhrases = [];
 
   for (let i = 0; i < phrases.length; i++) {
