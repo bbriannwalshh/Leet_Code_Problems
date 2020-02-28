@@ -42,8 +42,6 @@ var beforeAndAfterPuzzles = function (phrases) {
             let endingPhrase = splitPhrases[indices[k]];
             newPhrase = newPhrase.concat(endingPhrase);
             newPhrase = newPhrase.join(" ");
-            console.log(positions);
-            console.log(newPhrase);
             newPhrases.push(newPhrase);
           }
         }
@@ -51,10 +49,7 @@ var beforeAndAfterPuzzles = function (phrases) {
     }
   }
 
-  console.log(previousCombos);
-
   return newPhrases.sort();
-
 };
 
 // var createPhraseDict = function (phrases) {
