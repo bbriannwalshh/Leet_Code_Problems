@@ -32,5 +32,3 @@ function balancedSum(sales) {
     if (currForward === currBackward) return i;
   }
 }
-
-function main() {
