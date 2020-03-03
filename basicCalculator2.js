@@ -67,9 +67,6 @@ var calculate = function (s) {
 
   for (let i = 0; i < multiDiv.length; i++) {
     let ele = multiDiv[i];
-    console.log(ele);
-    console.log(final);
-    console.log(tempOp);
 
     if (addSubOps[ele]) {
       tempOp = ele;
