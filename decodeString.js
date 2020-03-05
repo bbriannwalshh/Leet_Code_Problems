@@ -3,6 +3,30 @@
  * @return {string}
  */
 var decodeString = function (s) {
+  let converted = convertToArr(s);
+
+  let counter;
+  let result = "";
+
+  for (let i = 0; i < converted.length; i++) {
+    let ele = converted[i];
+
+    if (Number.isInteger(ele)) {
+      counter = ele;
+      let subStr = stack(counter, converted.slice(i + 2));
+      result = result.concat(subStr[0]);
+      i += subStr[1];
+
+    } else {
+      result = result.concat(ele);
+
+    }
+  }
+
+  return result;
+};
+
+const convertToArr = function(s) {
   let converted = [];
   let nums = "1234567890";
   let bracket = "[]";
@@ -46,27 +70,7 @@ var decodeString = function (s) {
 
   if (strTemp) converted.push(strTemp);
 
-  console.log(converted);
-
-  let counter = null;
-  let result = "";
-
-  for (let i = 0; i < converted.length; i++) {
-    let ele = converted[i];
-
-    if (Number.isInteger(ele)) {
-      counter = ele;
-      let subStr = stack(counter, converted.slice(i + 2));
-      result = result.concat(subStr[0]);
-      i += subStr[1];
-
-    } else {
-      result = result.concat(ele);
-
-    }
-  }
-
-  return result;
+  return converted;
 };
 
 const stack = function (counter, str) {
