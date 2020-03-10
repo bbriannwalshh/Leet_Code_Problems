@@ -3,19 +3,43 @@
  * @return {string}
  */
 var reverseWords = function (s) {
-  debugger
-  s = s.split(" ");
   let noSpaces = [];
+  let temp = null;
+
   for (let i = 0; i < s.length; i++) {
     let ele = s[i];
-    if (ele !== " " && ele.length) {
-      noSpaces.push(ele);
+
+    if (ele === " ") {
+      if (temp) {
+        noSpaces.push(temp);
+        temp = null;
+      }
+    } else {
+      if (temp) {
+        temp = temp.concat(ele);
+      } else {
+        temp = ele;
+      }
     }
   }
 
-  console.log(noSpaces);
-  noSpaces.reverse();
-  return noSpaces.join(" ");
+  if (temp) {
+    noSpaces.push(temp);
+  }
+
+  let reversed = "";
+
+  for (let i = noSpaces.length - 1; i >= 0; i--) {
+    let ele = noSpaces[i];
+
+    reversed = reversed.concat(ele);
+
+    if (i !== 0) {
+      reversed = reversed.concat(" ");
+    }
+  }
+
+  return reversed;
 };
 
 let str = "  hello world!  ";
