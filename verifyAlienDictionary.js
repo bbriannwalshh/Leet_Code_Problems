@@ -9,7 +9,7 @@ var isAlienSorted = function (words, order) {
   let table = new Array(words.length).fill(false);
 
   for (let i = 0; i < order.length; i++) {
-    let char = order[i]
+    let char = order[i];
     dictionary[char] = i;
   }
 
