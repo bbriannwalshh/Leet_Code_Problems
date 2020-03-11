@@ -40,22 +40,33 @@ function iterateThrough(parent, values) {
 }
 
 function deepDive(node) {
+  debugger
   if (node.children.length) {
     let options = [];
 
-    for (let i = 0; i < tree.children.length; i++) {
-      let child = tree.children[i];
-      
+    for (let i = 0; i < node.children.length; i++) {
+      let child = node.children[i];
+      let deep = deepDive(child);
+      let childVal = deep[0];
+
+      if (node.value > node.value + childVal) {
+        options.push(node.value);
+      } else if (childVal > node.value + childVal) {
+        options.push(childVal);
+      } else {
+        options.push(childVal + node.value);
+      }
     }
-    
+
+    return [Math.max(...options), Math.max(...maxes)];
+
   } else {
     if (node.value < 0) {
-      return 0;
+      return [0, 0];
     } else {
       return node.value;
     }
   }
-
 }
 
 function bestSumDownwardTreePath(parent, values) {
@@ -63,16 +74,15 @@ function bestSumDownwardTreePath(parent, values) {
   
   let tree = iterateThrough(parent, values);
 
-  let options = [];
-
-  for (let i = 0; i < tree.children.length; i++) {
-    let depth = bestSumDownwardTreePath()
-  }
+  return deepDive(tree);
 }
 
-let parent = [-1, 0, 1, 2, 0];
+// let parent = [-1, 0, 1, 2, 0];
 
-let values = [-2, 10, 10, -3, 10];
+// let values = [-2, 10, 10, -3, 10];
+
+let parent = [-1, 0, 1, 2, 2, 1, 2, 0, 1];
+let values = [12, -7, 25, -5, -9, 6, 7, -3, 13];
 
 console.log(bestSumDownwardTreePath(parent, values));
 
