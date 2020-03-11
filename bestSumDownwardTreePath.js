@@ -39,23 +39,34 @@ function iterateThrough(parent, values) {
   return head;
 }
 
+function deepDive(node) {
+  if (node.children.length) {
+    let options = [];
+
+    for (let i = 0; i < tree.children.length; i++) {
+      let child = tree.children[i];
+      
+    }
+    
+  } else {
+    if (node.value < 0) {
+      return 0;
+    } else {
+      return node.value;
+    }
+  }
+
+}
+
 function bestSumDownwardTreePath(parent, values) {
   // Write your code here
   
   let tree = iterateThrough(parent, values);
-  
-  let stack = [tree];
 
-  while (stack.length) {
-    let length = stack.length;
-    for (i = 0; i < length; i++) {
-      let node = stack.shift();
-      console.log(node);
+  let options = [];
 
-      if (node.children.length) {
-        stack.push(...node.children);
-      }
-    }
+  for (let i = 0; i < tree.children.length; i++) {
+    let depth = bestSumDownwardTreePath()
   }
 }
 
