@@ -43,16 +43,22 @@ function deepDive(node) {
   debugger
   if (node.children.length) {
     let options = [];
+    let max = null;
 
     for (let i = 0; i < node.children.length; i++) {
       let child = node.children[i];
       let deep = deepDive(child);
       let childVal = deep[0];
+      let currMax = deep[1];
 
       if (node.value > node.value + childVal) {
         options.push(node.value);
       } else if (childVal > node.value + childVal) {
-        options.push(childVal);
+        if (max) {
+          if (max < childVal) {
+            max = childVal;
+          }
+        }
       } else {
         options.push(childVal + node.value);
       }
@@ -64,7 +70,7 @@ function deepDive(node) {
     if (node.value < 0) {
       return [0, 0];
     } else {
-      return node.value;
+      return [node.value, node.value];
     }
   }
 }
