@@ -12,7 +12,7 @@
 var swapPairs = function (head) {
   if (!head || !head.next) return head;
 
-  let start = null
+  let start = null;
   let prev = null;
   curr = head;
   forward = head.next;
@@ -28,8 +28,8 @@ var swapPairs = function (head) {
 
     prev = curr;
     curr = furthest;
-    (curr) ? (forward = curr.next) : (forward = null);
-    (forward) ? (furthest = forward.next) : (furthest = null);
+    forward = curr ? curr.next : null;
+    furthest = forward? forward.next : null; 
   }
 
   return start;
