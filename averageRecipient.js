@@ -115,7 +115,7 @@ const evenDistribution = function (object, spending) {
   }
 
   return result;
-}
+};
 
 let obj = {
   "chris": 3,
@@ -125,7 +125,7 @@ let obj = {
   "simon": 1,
   "patrick": 5,
   "Haley": 1
-}
+};
 
 let spending = 1000;
 
