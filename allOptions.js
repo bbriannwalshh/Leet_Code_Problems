@@ -1,6 +1,7 @@
 
 
 const allOptions = function(arr, target) {
+  if (target === 0) return 1;
   let numCounter = 0;
   
   for (let i = 0; i < arr.length; i ++) {
@@ -13,3 +14,5 @@ const allOptions = function(arr, target) {
 
   return numCounter;
 };
+
+console.log(allOptions([1,2,3], 5));
