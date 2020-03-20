@@ -13,12 +13,41 @@
 
 const sortHelper = function(a, b) {
   if (a < b) {
-    return -1;
-  } else {
     return 1;
+  } else {
+    return -1;
   }
-}
+};
 
+const sumOfLargestKElements = function(array, k) {
+  let currLargest = [];
+
+  for (let i = 0; i < array.length; i++) {
+    if (currLargest.length < k) {
+      currLargest.push(array[i]);
+
+      if (currLargest.length === k) {
+        currLargest.sort(sortHelper);
+      }
+
+    } else {
+      let lastEle = currLargest[k - 1];
+      let currEle = array[i];
+
+      if (lastEle < currEle) {
+        currLargest.pop();
+        currLargest.push(currEle);
+        currLargest.sort(sortHelper);
+      }
+    }
+  }
+  console.log(currLargest);
+  return currLargest.reduce((a,b) => a + b, 0);
+};
+
+let arr = [6,1,9,8,5];
+let k = 3;
+// console.log(sumOfLargestKElements(arr, k));
 // currLargest: 12, 9, 8
 // lastEle = 6;
 // currEle = 5
@@ -86,49 +115,63 @@ const sortHelper = function(a, b) {
 
 
 
-// const sumStorage = function (arr1(n), arr2, k, m) {
-//   n * m logm
+const sumStorage = function (arr1, arr2, k, m) {
 
-// let storage = [];				// storage: [[6], [1]]
-// let chars = {};					// chars: {A: 0, B:1}
+let storage = [];				// storage: [[6], [1]]
+let chars = {};					// chars: {A: 0, B:1}
 
-// for (let i = 0; i < arr1.length; i++) {
-//   let num = arr1[i];			// 9
-//   let char = arr2[i];			// A
+for (let i = 0; i < arr1.length; i++) {
+  let num = arr1[i];			// 9
+  let char = arr2[i];			// A
 
-//   if (chars[char]) {
-//     let idx = chars[char];
-//     let store = storage[idx];
+  if (Number.isInteger(chars[char])) {
+    let idx = chars[char];
+    let store = storage[idx];
 
-//     if (store.length < m) {
-//       store.push(num);
+    if (store.length < m) {
+      store.push(num);
 
-//       if (store.length === m) {
-//         store.sort(sortHelper);
-//       }
-//     } else {
-//       let lastEle = store[m - 1];
-//       let currEle = num;
+      if (store.length === m) {
+        store.sort(sortHelper);
+      }
+    } else {
+      let lastEle = store[m - 1];
+      let currEle = num;
 
-//       if (currEle > lastEle) {
-//         store[m - 1] = num;
-//         store.sort(sortHelper);
-//       }
-//     }
-//   } else {
-//     chars[char] = storage.length;
-//     storage.push([num]);
-//   }
-// }
-// let combined = storage.flat();
-// combined.sort(sortHelper);
-// let maxTotal = [];
-// for (let i = 0; i < k; i++) {
-//   maxTotal.push(combined[i]);
-// }
+      if (currEle > lastEle) {
+        store[m - 1] = num;
+        store.sort(sortHelper);
+      }
+    }
+  } else {
+    chars[char] = storage.length;
+    storage.push([num]);
+  }
+}
 
-// return Math.sum(...madTotal);
-// }
+let combined = storage.flat();
+combined.sort(sortHelper);
+let maxTotal = [];
+for (let i = 0; i < k; i++) {
+  maxTotal.push(combined[i]);
+}
+
+return maxTotal.reduce((a,b) => a + b, 0);
+};
+
+
+
+
+
+
+let arr1 = [6, 1, 9, 8, 5];
+let arr2 = ["A", "B", "A", "A", "B"];
+let j = 3;
+let m = 2; 
+
+console.log(sumStorage(arr1, arr2, j, m));
+
+
 // User, Post, ...
 
 // 1. User can make posts
