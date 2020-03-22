@@ -9,46 +9,45 @@ var gameOfLife = function (board) {
 
   for (let i = 0; i < board.length; i++) {
     for (let j = 0; j < board[i].length; j++) {
-      let ele = board[i][j];
 
-      let pos1 = board[i - 1]
+      let pos1 = (board[i - 1]
         && Number.isInteger(board[i - 1][j - 1])
-        && board[i - 1][j - 1] === 1 ?
+        && board[i - 1][j - 1] === 1) ?
         board[i - 1][j - 1] : 0;
 
-      let pos2 = board[i - 1]
+      let pos2 = (board[i - 1]
         && Number.isInteger(board[i - 1][j])
-        && board[i - 1][j] === 1 ?
+        && board[i - 1][j] === 1) ?
         board[i - 1][j] : 0;
 
-      let pos3 = board[i - 1]
+      let pos3 = (board[i - 1]
         && Number.isInteger(board[i - 1][j + 1])
-        && board[i - 1][j + 1] === 1 ?
+        && board[i - 1][j + 1] === 1) ?
         board[i - 1][j + 1] : 0;
 
-      let pos4 = board[i]
+      let pos4 = (board[i]
         && Number.isInteger(board[i][j - 1])
-        && board[i][j - 1] === 1 ?
+        && board[i][j - 1] === 1) ?
         board[i][j - 1] : 0;
 
-      let pos5 = board[i]
+      let pos5 = (board[i]
         && Number.isInteger(board[i][j + 1])
-        && board[i][j + 1] === 1 ?
+        && board[i][j + 1] === 1) ?
         board[i][j + 1] : 0;
 
-      let pos6 = board[i + 1]
+      let pos6 = (board[i + 1]
         && Number.isInteger(board[i + 1][j - 1])
-        && board[i + 1][j - 1] === 1 ?
+        && board[i + 1][j - 1] === 1) ?
         board[i + 1][j - 1] : 0;
 
-      let pos7 = board[i + 1]
+      let pos7 = (board[i + 1]
         && Number.isInteger(board[i + 1][j])
-        && board[i + 1][j] === 1 ?
+        && board[i + 1][j] === 1) ?
         board[i + 1][j] : 0;
 
-      let pos8 = board[i + 1]
+      let pos8 = (board[i + 1]
         && Number.isInteger(board[i + 1][j + 1])
-        && board[i + 1][j + 1] === 1 ?
+        && board[i + 1][j + 1] === 1) ?
         board[i + 1][j + 1] : 0;
 
       let sum = pos1 + pos2 + pos3 + pos4 + pos5 + pos6 + pos7 + pos8;
